@@ -8,9 +8,8 @@
 #include <vector>
 using namespace std;
 
-void printArr(vector<string> lists){
-	int n = 3;
-	for (int i = 0; i < lists.size()-1; i ++){
+void printArr(vector<string> lists, int n){
+	for (int i = 0; i < lists.size(); i ++){
 		for (int j = 0; j < n; j++){
 			cout << (lists[i])[j];
 		}
@@ -33,25 +32,28 @@ vector<string> createGray(int n){
 			L2.push_back(L1[i]);
 		}
 
-		for (int i = 0; i < L1.size();i++){
+		for (int i = 0; i < L1.size(); i++){ // adding 0s/1s
 			L1[i] = "0" + L1[i];
 			L2[i] = "1" + L2[i];
 		}
 
-		L.insert(L.end(), L1.begin(), L1.end());
+		L.insert(L.end(), L1.begin(), L1.end()); // appending lists
 		L.insert(L.end(), L2.begin(), L2.end());
 	} // end else
 	return L;
 }
 int main() {
-	cout << "Hello1" << endl;
-
-	vector<string> lists = createGray(3);
-	for (int i = 0; i < lists.size(); i ++){
-		for (int j = 0; j < 3; j++){
-			cout << (lists[i])[j];
-		}
-		cout << endl;
+	int n;
+	cout << "enter value for n" << endl;
+	cin >> n;
+	if (cin.bad()) {
+		cout << "bad input. exiting." << endl;
+		return 0;
 	}
+//	cout << "n:" << n << endl;
+	vector<string> lists = createGray(n);
+
+	printArr(lists,n);
+
 	return 0;
 }
