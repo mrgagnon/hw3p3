@@ -24,7 +24,7 @@ vector<string> createGray(int n){
 		L.push_back("1");
 	}
 	else {
-		vector<string> L1;  //L1 is recursive call
+		vector<string> L1;  //L1 is recursive call n-1
 		n--;
 		L1 = createGray(n);
 
