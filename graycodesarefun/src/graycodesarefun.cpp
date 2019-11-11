@@ -26,15 +26,15 @@ void printArr(vector<string> lists, int n){
  * @param groupList The previously generated gray code listings
  * @param n The max number in each group
  */
-void printWithNames(vector<string> groupList, int n) {
+void printWithNames(vector<string> groupList, int n, string names[]) {
 	//string names[4] = {"Alice", "Bob", "Chris", "Dylan"};
-	string names[4] = {"Dylan", "Chris", "Bob", "Alice"};
+	//string names[4] = {"Dylan", "Chris", "Bob", "Alice"};
 	cout << "Index | Gray Code | Child(ren in Photo | Action" << endl;
 
-	string prevGroup = "0000";
+	string prevGroup = "000000000000"; // limits the groups to 12 TODO modify?
 
 	for (int i = 0; i < groupList.size(); i++){ // printing each row
-		string inPhoto[4] = {"","","",""}; // list of children in current group
+		string inPhoto[n]; // list of children in current group
 		int inPhotoPos = 0;
 
 		cout << i << " | ";
@@ -99,7 +99,7 @@ vector<string> createGray(int n){
 	return L;
 }
 
-/* Gets user input for the number. Call to createGray. Prints results.
+/* Gets user input for the number. Call to createGray. Prints results/table
  *
  */
 int main() {
@@ -111,9 +111,21 @@ int main() {
 		return 0;
 	}
 
-	vector<string> lists = createGray(n);
-	//printArr(lists,n);
-	printWithNames(lists, n);
+	cout << "Number entered: " << n << endl;
+	vector<string> listsN = createGray(n);
+	printArr(listsN,n);
+
+	cout << "Dylan, Christ, Bob, Alice" << endl;
+	vector<string> lists = createGray(4);
+	string names[4] = {"Dylan", "Chris", "Bob", "Alice"};
+	printWithNames(lists, 4, names);
+
+	/*
+	cout << "Extended List" << endl;
+	vector<string> listExtended = createGray(11);
+	string namesExtended[11] = {"Karl", "Jane", "Ian", "Helen", "Gerry", "Felix", "Eve", "Dylan", "Chris", "Bob", "Alice"};
+	printWithNames(listExtended, 11, namesExtended);
+	*/
 
 	return 0;
 }
