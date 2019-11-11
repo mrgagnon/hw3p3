@@ -8,42 +8,49 @@
 #include <vector>
 using namespace std;
 
+void printArr(vector<string> lists){
+	int n = 3;
+	for (int i = 0; i < lists.size()-1; i ++){
+		for (int j = 0; j < n; j++){
+			cout << (lists[i])[j];
+		}
+		cout << endl;
+	}
+}
 vector<string> createGray(int n){
+	vector<string> L;
 	if (n == 1){
-		vector<string> arr;
-		arr.push_back("0");
-		arr.push_back("1");
-		return arr;
+		L.push_back("0");
+		L.push_back("1");
 	}
 	else {
-		vector<string> arrPrev;
-		arrPrev = createGray(n-1); //recursive call
+		vector<string> L1;  //L1 is recursive call
+		n--;
+		L1 = createGray(n);
 
-		vector<string> arrRev;  // Reversing L1/arrPrev
-		for (int i = arrPrev.size()-1; i >= 0; i--){
-			arrRev.push_back(arrPrev[i]);
+		vector<string> L2; //L2 is L1 in reverse
+		for (int i = L1.size()-1; i >= 0; i--){
+			L2.push_back(L1[i]);
 		}
 
-		for (int i = 0; i < arrPrev.size()-1;i++){ //Adding 0 infront of arrPrev/L1, 1 infront of arrRev/L2
-			arrPrev[i] = "0" + arrPrev[i];
-			arrRev[i] = "1" + arrRev[i];
+		for (int i = 0; i < L1.size();i++){
+			L1[i] = "0" + L1[i];
+			L2[i] = "1" + L2[i];
 		}
 
-		vector<string> arrResult; //appending the two lists
-		arrResult.insert(arrResult.begin(), arrPrev.begin(), arrPrev.end());
-		arrResult.insert(arrResult.end(), arrRev.begin(), arrRev.end());
-		return arrResult;
+		L.insert(L.end(), L1.begin(), L1.end());
+		L.insert(L.end(), L2.begin(), L2.end());
 	} // end else
+	return L;
 }
-
 int main() {
 	cout << "Hello1" << endl;
 
 	vector<string> lists = createGray(3);
 	for (int i = 0; i < lists.size(); i ++){
-			for (int j = 0; j < 3; j++){
-				cout << (lists[i])[j];
-			}
+		for (int j = 0; j < 3; j++){
+			cout << (lists[i])[j];
+		}
 		cout << endl;
 	}
 	return 0;
